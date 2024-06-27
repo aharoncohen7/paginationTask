@@ -9,18 +9,18 @@ export default function App() {
 
    return (
       <div>
-         <header className="p-4 text-center">
-            <div className='flex  mb-4 p-4 border cursor-pointer gap-60 bg-black text-white font-mono'>
-               <div className='flex gap-6'>
+         <header className="p-4 ">
+            <div className='flex justify-between mb-4  border cursor-pointer text-xl bg-black text-white font-mono'>
+               <div className='flex gap-6 '>
                   {types.map(type => {
                      return (
-                        <button onClick={() => setType(type)} type="button" >{type}</button>
+                        <button className="cursor-pointer first-letter:uppercase hover:text-black hover:bg-white p-2" onClick={() => setType(type)} type="button" >{type}</button>
                      )
                   })}
                </div>
-               <h1 className="text-xl font-bold font-mono ">{type} Table</h1>
+               <h1 className="text-5xl font-bold font-mono ">{type} Table</h1>
+            <img src="./icon.png" alt="logo"/>
             </div>
-
          </header>
          <main className="p-4">
             <DataTable url={url} />

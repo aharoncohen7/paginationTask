@@ -10,11 +10,10 @@ const DataTable = ({ url }) => {
   const [sortKey, setSortKey] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalLength, setTotalLength] = useState(1);
+  const [totalLength, setTotalLength] = useState(0);
   const itemsPerPage = 10;
 
   const handleSort = (key) => {
-    console.log(key, "💛🧡")
     const order = sortKey === key && sortOrder === 'asc' ? 'desc' : 'asc';
     setSortKey(key);
     setSortOrder(order);
@@ -76,7 +75,7 @@ const DataTable = ({ url }) => {
                   className="py-2 px-4 border cursor-pointer first-letter:uppercase"
                   onClick={() => handleSort(key)}
                 >
-                  {key == "isActive" ? "status" : (key == "_id" ? "id" : key)} <span className={sortKey === key ? "" : "hidden"}>{dir}</span>
+                  {key == "isActive" ? "status" : (key == "_id" ? "id" : key)}{sortKey === key ? <span>{dir}</span>: <span className='text-white'>{`---`}</span>}
                 </th>}
              
              </>
