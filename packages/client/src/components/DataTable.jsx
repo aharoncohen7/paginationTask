@@ -6,9 +6,9 @@ const DataTable = ({ url }) => {
 
   const [data, setData] = useState('');
   const [search, setSearch] = useState('');
+  const [isActive, setIsActive] = useState('all');
   const [sortKey, setSortKey] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
-  const [isActive, setIsActive] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalLength, setTotalLength] = useState(1);
   const itemsPerPage = 10;
@@ -36,6 +36,11 @@ const DataTable = ({ url }) => {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    setCurrentPage(1)
+    setTotalLength(0)
+  }, [url, search, isActive]);
 
   useEffect(() => {
     fetchBodyInfo();
