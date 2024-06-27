@@ -24,21 +24,28 @@ const DataTable = ({ url }) => {
   const fetchBodyInfo = async () => {
     try {
       const response = await axios.post(url, { search, sortKey, sortOrder, isActive, currentPage });
-      setData(response.data.items);
-      setTotalLength(response.data.count)
+      if (response.status == 200) {
+        setData(response.data.items);
+        setTotalLength(response.data.count)
+      }
+     
     } catch (err) {
+      console.log("Error in fetching data");
+      setData([]);
+      setTotalLength(0)
       console.error(err);
     }
   };
 
   useEffect(() => {
     fetchBodyInfo();
-  }, [search, sortKey, sortOrder, isActive, currentPage]);
+  }, [url, search, sortKey, sortOrder, isActive, currentPage]);
 
   const totalPages = Math.floor(totalLength / itemsPerPage);
   return (
     <>
       <div className="p-4">
+
         <div className="flex mb-4">
           <input
             type="text"
@@ -54,17 +61,20 @@ const DataTable = ({ url }) => {
           </select>
         </div>
 
-       {data.length ? <table className="min-w-full">
+        {data.length ? <table className="min-w-full">
           <thead>
             <tr>
               {data && Object.keys(data[0]).map((key, i) => (
-                <th
+             <>
+               {key != "__v" && <th
                   key={key}
                   className="py-2 px-4 border cursor-pointer first-letter:uppercase"
                   onClick={() => handleSort(key)}
                 >
-                  {key == "isActive" ? "status" : key} <span className={sortKey === key ? "" : "hidden"}>{dir}</span>
-                </th>
+                  {key == "isActive" ? "status" : (key == "_id" ? "id" : key)} <span className={sortKey === key ? "" : "hidden"}>{dir}</span>
+                </th>}
+             
+             </>
               ))}
             </tr>
           </thead>
@@ -72,29 +82,31 @@ const DataTable = ({ url }) => {
             {data && data.map((obj) => (
               <tr key={obj.id} className="text-center">
                 {obj && Object.entries(obj).map(([key, value]) => (
-                  <td
+                  <>
+                 { key != "__v" &&<td
                     key={key}
                     className={`py-2 px-4 border ${key === "isActive" ? (obj.isActive ? 'text-green-500' : 'text-red-500') : ""}`}
                   >
                     {key !== "isActive" ? value : (obj.isActive ? 'Yes' : 'No')}
-                  </td>
+                  </td>}
+                  </>
                 ))}
               </tr>
             ))}
           </tbody>
         </table> :
-         <div className='flex items-center justify-center  gap-6 flex-col hover:'>
-        <h1 className='flex items-center justify-center h-10 p-8 border text-5xl' >not found data</h1>
-        <button className='border text-xl' onClick={() => setSearch('')}>Refresh </button>
-      </div> 
-        
+          <div className='flex items-center justify-center  gap-6 flex-col hover:'>
+            <h1 className='flex items-center justify-center h-10 p-8 border text-5xl' >not found data</h1>
+            <button className='border text-xl' onClick={() => setSearch('')}>Refresh </button>
+          </div>
+
         }
 
         <Pagination currentPage={currentPage} totalPages={totalPages} totalLength={totalLength} itemsPerPage={data.length} setCurrentPage={setCurrentPage} />
 
-      </div> 
+      </div>
 
-     
+
 
     </>
   );
