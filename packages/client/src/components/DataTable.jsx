@@ -136,13 +136,14 @@ const DataTable = ({ type }) => {
           <tbody>
             {data.length ? data.map((row) => (
               <tr key={row.id} className="text-center">
-                {row && Object.entries(row).map(([key, value], i) => (
+                {row && Object.entries(row).map(([key, value]) => (
                   <>
                     {key != "__v" && <td
                       key={key}
-                      className={`py-2 px-4 border ${key === "isActive" ? (value ? 'text-green-500' : 'text-red-500') : ""}`}
+                      className={`py-2 px-4 border ${key === "isActive" ||key === "isAvailable" ? (value ? 'text-green-500' : 'text-red-500') : ""}`}
                     >
-                      {key !== "isActive" ? value : (row.isActive ? 'Yes' : 'No')}
+                      {key !== "isActive" && key !== "isAvailable" ? value : (value ? 'Yes' : 'No')}
+                  
                     </td>
                     }
                   </>

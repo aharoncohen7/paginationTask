@@ -40,8 +40,8 @@ function createColumn<T>(
         createColumn<ICar>('year', 'number', "שנת ייצור", true, true),
         createColumn<ICar>('color', 'string', 'צבע', true, true),
         createColumn<ICar>('price', 'number', 'מחיר', true, true),
-        createColumn<ICar>('fuelType','T_fuelType', 'סוג דלק', true, true),
         createColumn<ICar>('isAvailable', 'boolean', 'האם פנוי', true, true),
+        createColumn<ICar>('fuelType','T_fuelType', 'סוג הנעה', true, true),
     ]
   };
     //   const userTableSchema: TableSchema = {
