@@ -1,2 +1,2 @@
-type ActivityStatus = 'all' | 'active' | 'inactive' | boolean ;
+type ActivityStatus = 'all' | 'true' | 'false' | boolean ;
 export default ActivityStatus

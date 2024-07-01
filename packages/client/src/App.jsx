@@ -4,7 +4,7 @@ import DataTable from "./components/DataTable";
 export default function App() {
    const types = ["users", "cars", "houses"]
    const [type, setType] = useState(types[0]);
-   const url = 'http://localhost:3355/' + type;
+   
 
 
    return (
@@ -23,7 +23,7 @@ export default function App() {
             </div>
          </header>
          <main className="p-4">
-            <DataTable url={url} />
+            <DataTable type={type} />
          </main>
       </div>
    )

@@ -2,7 +2,6 @@ class CreateNewUserRequest {
     fullName: string
     age: number
     email: string
-  
     phone: string
 
 

@@ -4,7 +4,7 @@ import SortOrder from "../../unions/T_sortOrder";
 
 
 class FilterCarRequest {
-    model?: string;
+    license?: string;
     sortKey?: keyof ICar;
     search?: string;
     isAvailable?: AvailableStatus;
@@ -12,7 +12,8 @@ class FilterCarRequest {
     currentPage?: number;
 
 
-    constructor(search: string = '', sortOrder: SortOrder = 'asc', sortKey: keyof ICar = 'model', color: string = '', currentPage: number = 1, isAvailable: AvailableStatus = "all") {
+    constructor(license:string = "", search: string = '', sortOrder: SortOrder = 'asc', sortKey: keyof ICar = 'model', color: string = '', currentPage: number = 1, isAvailable: AvailableStatus = "all") {
+        this.license = license;
         this.search = search;
         this.isAvailable = isAvailable;
         this.sortKey = sortKey;
@@ -20,6 +21,7 @@ class FilterCarRequest {
         this.currentPage = currentPage;
     }
 }
+
 
 export default FilterCarRequest
 

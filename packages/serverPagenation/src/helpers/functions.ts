@@ -1,13 +1,15 @@
 import IUser from "../interfaces/IUser";
+import TableSchema from "../unions/T_TableSchema";
+import { carTableSchema, userTableSchema } from "./schema";
 
-export const filterData = (data: IUser[], search: string, isActive: 'all' | 'active' | 'inactive'): IUser[] => {
+export const filterData = (data: IUser[], search: string, isActive: 'all' | 'true' | 'false'): IUser[] => {
     return data.filter((user: IUser) => {
         const matchesSearch: boolean =
             user.fullName.toLowerCase().includes(search.toLowerCase()) ||
             user.email.toLowerCase().includes(search.toLowerCase());
 
         const matchesStatus: boolean =
-            isActive === 'all' || user.isActive === (isActive === 'active');
+            isActive === 'all' || user.isActive === (isActive === 'true');
 
         return matchesSearch && matchesStatus;
     });
@@ -35,6 +37,28 @@ export const sortData = <K extends keyof IUser>(
       return 0;
     });
   };
+
+
+
+
+ export const getTableColumns = (tableName: string): TableSchema<any> | null => {
+    if (tableName === 'users') {
+        return userTableSchema;
+    }
+
+    if (tableName === 'cars') {
+        return carTableSchema;
+    }
+    return null;
+}
+
+
+
+
+
+
+
+
 // export const sortData = <K extends keyof IUser>(
 //     data: IUser[], 
 //     key: K, 

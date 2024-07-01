@@ -4,7 +4,6 @@ export const Mapper = <T>(dto: T, body: any): T => {
     }
 
     const mappedDTO: Partial<T> = {};
-
     Object.keys(dto).forEach(key => {
         const targetValue = body && body[key];
         const dtoValue = (dto as any)[key];

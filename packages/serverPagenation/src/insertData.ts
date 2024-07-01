@@ -3,6 +3,8 @@ import IUser from "./interfaces/IUser";
 import { connectToMongo } from "./models/connectToMongo";
 import UserModel from "./models/UserModel";
 import 'dotenv/config';
+import ICar from "./interfaces/ICar";
+import CarModel from "./models/CarModel";
 
 connectToMongo()
 
@@ -23,6 +25,19 @@ async function insertUsers(usersArray: IUser[]): Promise<mongoose.Document[]> {
     }
   }
   
+
+  async function insertCars(carsArray: ICar[]): Promise<mongoose.Document[]> {
+    try {  
+      const insertedCars = await CarModel.insertMany(carsArray);
+      console.log(`Successfully inserted ${insertedCars.length} cars.`);
+      return insertedCars;
+    } catch (error) {
+      console.error('Error inserting users:', error);
+      throw error;
+    } 
+  }
+
+
   // Example usage:
   const usersToInsert: IUser[] = [
     {
@@ -208,14 +223,196 @@ async function insertUsers(usersArray: IUser[]): Promise<mongoose.Document[]> {
 ];
 
   
-  // Call the function
-
+const carsToInsert: ICar[] = [
+    {
+        license: "12-345-67",
+        year: 2022,
+        model: "Toyota Corolla",
+        color: "Silver",
+        price: 100000,
+        fuelType: "hybrid",
+        isAvailable: true
+    },
+    {
+        license: "23-456-78",
+        year: 2023,
+        model: "Tesla Model 3",
+        color: "White",
+        price: 250000,
+        fuelType: "electric",
+        isAvailable: true
+    },
+    {
+        license: "34-567-89",
+        year: 2021,
+        model: "Honda Civic",
+        color: "Blue",
+        price: 90000,
+        fuelType: "petrol",
+        isAvailable: true
+    },
+    {
+        license: "45-678-90",
+        year: 2023,
+        model: "Nissan Leaf",
+        color: "Green",
+        price: 180000,
+        fuelType: "electric",
+        isAvailable: true
+    },
+    {
+        license: "56-789-01",
+        year: 2020,
+        model: "Ford Focus",
+        color: "Red",
+        price: 85000,
+        fuelType: "petrol",
+        isAvailable: false
+    },
+    {
+        license: "67-890-12",
+        year: 2022,
+        model: "Mazda 3",
+        color: "Black",
+        price: 110000,
+        fuelType: "petrol",
+        isAvailable: true
+    },
+    {
+        license: "78-901-23",
+        year: 2023,
+        model: "Hyundai Ioniq",
+        color: "Silver",
+        price: 200000,
+        fuelType: "electric",
+        isAvailable: true
+    },
+    {
+        license: "89-012-34",
+        year: 2021,
+        model: "Kia Forte",
+        color: "White",
+        price: 95000,
+        fuelType: "petrol",
+        isAvailable: true
+    },
+    {
+        license: "90-123-45",
+        year: 2022,
+        model: "Chevrolet Bolt",
+        color: "Orange",
+        price: 190000,
+        fuelType: "electric",
+        isAvailable: true
+    },
+    {
+        license: "01-234-56",
+        year: 2023,
+        model: "Toyota Prius",
+        color: "Blue",
+        price: 150000,
+        fuelType: "hybrid",
+        isAvailable: true
+    },
+    {
+        license: "12-345-68",
+        year: 2021,
+        model: "BMW i3",
+        color: "Gray",
+        price: 220000,
+        fuelType: "electric",
+        isAvailable: false
+    },
+    {
+        license: "23-456-79",
+        year: 2022,
+        model: "Subaru Impreza",
+        color: "Red",
+        price: 120000,
+        fuelType: "petrol",
+        isAvailable: true
+    },
+    {
+        license: "34-567-90",
+        year: 2023,
+        model: "Volkswagen ID.4",
+        color: "White",
+        price: 240000,
+        fuelType: "electric",
+        isAvailable: true
+    },
+    {
+        license: "45-678-91",
+        year: 2021,
+        model: "Lexus CT",
+        color: "Black",
+        price: 180000,
+        fuelType: "hybrid",
+        isAvailable: true
+    },
+    {
+        license: "56-789-02",
+        year: 2022,
+        model: "Renault Zoe",
+        color: "Blue",
+        price: 160000,
+        fuelType: "electric",
+        isAvailable: true
+    },
+    {
+        license: "67-890-13",
+        year: 2020,
+        model: "Suzuki Swift",
+        color: "Yellow",
+        price: 75000,
+        fuelType: "petrol",
+        isAvailable: false
+    },
+    {
+        license: "78-901-24",
+        year: 2023,
+        model: "Audi e-tron",
+        color: "Silver",
+        price: 350000,
+        fuelType: "electric",
+        isAvailable: true
+    },
+    {
+        license: "89-012-35",
+        year: 2021,
+        model: "Mitsubishi Mirage",
+        color: "Green",
+        price: 70000,
+        fuelType: "petrol",
+        isAvailable: true
+    },
+    {
+        license: "90-123-46",
+        year: 2022,
+        model: "Jaguar I-PACE",
+        color: "Red",
+        price: 400000,
+        fuelType: "electric",
+        isAvailable: true
+    },
+    {
+        license: "01-234-57",
+        year: 2023,
+        model: "Mercedes-Benz C-Class",
+        color: "Black",
+        price: 280000,
+        fuelType: "hybrid",
+        isAvailable: false
+    }
+];
 
   export const insertData = async (): Promise<void> => {
     try {
       const insertedUsers = await insertUsers(usersToInsert);
-      console.log('Inserted users:', insertedUsers);
+    console.log('Inserted users:', insertedUsers );
+      const insertedCars = await insertCars(carsToInsert);
+      console.log('Inserted cars', insertedCars);
     } catch (error) {
-      console.error('Failed to insert users:', error);
+      console.error('Failed to insert data:', error);
     }
   };

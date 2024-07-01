@@ -26,9 +26,10 @@ class UserController implements IController<IUser> {
     //     }
     //   }
 
-
     async read(filter: FilterUserRequest): Promise<{ items: IUser[], count: number }> {
-        const { search, isActive, sortKey, sortOrder, currentPage } = filter;
+        const { search, isActive, sortKey, sortOrder, currentPage, filters } = filter;
+        console.log(filters, "📵📵📵📵📵📵");
+
         const itemsPerPage = 10;
         const startIndex = currentPage ? (currentPage - 1) * itemsPerPage : 0;
 
@@ -37,17 +38,17 @@ class UserController implements IController<IUser> {
                 { fullName: { $regex: search || "", $options: 'i' } },
                 { email: { $regex: search || "", $options: 'i' } }
             ],
-            isActive: isActive ? (isActive == "active" || isActive == "inactive" ? (isActive == "active" ? true : false) : undefined) : undefined
+            isActive: isActive ? (isActive == "true" || isActive == "false" ? (isActive == "true" ? true : false) : undefined) : undefined
         };
-        if (!isActive || (isActive != "active" && isActive != "inactive")) {
+        if (!isActive || (isActive != "true" && isActive != "false")) {
             delete filter2.isActive;
         }
 
         let users = await UserModel.find(filter2)
         if (users.length > 0) {
-            return { items: sortData(users, sortKey, sortOrder).slice(startIndex, startIndex + itemsPerPage), count:users.length };
+            return { items: sortData(users, sortKey, sortOrder).slice(startIndex, startIndex + itemsPerPage), count: users.length };
         }
-        else  return { items: [], count:0 }
+        else return { items: [], count: 0 }
     }
 
 
