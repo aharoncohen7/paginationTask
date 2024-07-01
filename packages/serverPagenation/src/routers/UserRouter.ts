@@ -32,7 +32,7 @@ router.get('/:email', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
     try {
-        // console.log(req.body, '__❤❤____')
+        console.log(req.body, '__❤❤____')
         let filter = Mapper<FilterUserRequest>(new FilterUserRequest(), req.body)
         console.log({ filter })
         res.send(await UserService.getAllUsers(filter))

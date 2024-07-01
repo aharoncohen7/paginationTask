@@ -3,8 +3,7 @@ import UserController from "../controller/UserController";
 import IUser from "../interfaces/IUser";
 import CreateNewUserRequest from "../dto/user/CreateNewUserRequest";
 import FilterUserRequest from "../dto/user/FilterUserRequest";
-import TableSchema from "../unions/T_TableSchema";
-import { carTableSchema, userTableSchema } from "../helpers/schema";
+
 
 class UserService {
     private static controller: UserController = new UserController()

@@ -6,5 +6,4 @@ type TableSchema<T> = {
     columns: IColumnDefinition<T>[];
   }
     
-
   export default TableSchema;

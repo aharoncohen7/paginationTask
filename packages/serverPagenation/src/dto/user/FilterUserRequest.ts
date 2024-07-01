@@ -1,19 +1,26 @@
+import { IFilters } from "../../interfaces/IFilters";
+import { GenericFilterRequest } from "../../interfaces/IGenericFilterRequest";
 import IUser from "../../interfaces/IUser";
+import ActivityStatus from "../../unions/T_activeStatus";
+import SortOrder from "../../unions/T_sortOrder";
 
-type ActivityStatus = 'all' | 'true' | 'false' | boolean;
-export type SortOrder = 'asc' | 'desc';
-
-class FilterUserRequest {
-
+class FilterUserRequest  implements GenericFilterRequest<IUser>{
     email?: string;
     sortKey?: keyof IUser;
     search?: string;
     isActive?: ActivityStatus;
     sortOrder?: SortOrder;
     currentPage?: number;
-    filters?: Object
+    filters?: IFilters;
 
-    constructor(search: string = '', sortOrder: SortOrder = 'asc', isActive: ActivityStatus = 'all', filters:Object = {}, sortKey: keyof IUser = 'fullName', email: string = '', currentPage: number = 1) {
+    constructor(search: string = '',
+         sortOrder: SortOrder = 'asc',
+          isActive: ActivityStatus = 'all',
+           filters:IFilters = {},
+           sortKey: keyof IUser = 'fullName',
+           email: string = '',
+           currentPage: number = 1) 
+        {
         this.email = email;
         this.search = search;
         this.isActive = isActive;

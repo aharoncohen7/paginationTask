@@ -6,6 +6,8 @@ export default interface IColumnDefinition<T> {
   key: keyof T;
   type: ColumnType;
   label: string;
+  sortable: boolean;
+  filterable: boolean;
 }
 
 

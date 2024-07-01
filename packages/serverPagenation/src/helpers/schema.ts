@@ -7,26 +7,44 @@ import ColumnType from "../unions/T_columnType";
 function createColumn<T>(
     key: keyof T, 
     type: ColumnType, 
-    label: string, 
+    label: string,
+    sortable: boolean,
+    filterable: boolean,
   ): IColumnDefinition<T> {
-    return { key, type, label };
+    return { key, type, label, sortable, filterable};
   }
   
   
   export const userTableSchema: TableSchema<IUser> = {
     name: 'users',
+  
     columns: [
-        createColumn<IUser>('_id', 'string', "מזהה"),
-        createColumn<IUser>('fullName', 'string', 'שם מלא'),
-        createColumn<IUser>('age', 'number', 'גיל'),
-        createColumn<IUser>('email', 'string', 'אימייל'),
-        createColumn<IUser>('phone', 'string', 'טלפון'),
-        createColumn<IUser>('permission', 'permission', 'הרשאה'),
-        createColumn<IUser>('isActive', 'boolean', 'פעיל'),
+        createColumn<IUser>('_id', 'string', "מזהה", false, true),
+        createColumn<IUser>('fullName', 'string', 'שם מלא', true, true),
+        createColumn<IUser>('age', 'number', 'גיל', true, true),
+        createColumn<IUser>('email', 'string', 'אימייל', true, true),
+        createColumn<IUser>('phone', 'string', 'טלפון', true, true),
+        createColumn<IUser>('permission', 'permission', 'הרשאה', true, true),
+        createColumn<IUser>('isActive', 'boolean', 'פעיל', true, true),
     ]
   };
+  
 
-    // const userTableSchema: TableSchema = {
+
+  export const carTableSchema: TableSchema<ICar> = {
+    name: 'cars',
+    columns: [
+        createColumn<ICar>('_id', 'string', "מזהה", false, true  ),
+        createColumn<ICar>('license', 'string', 'License', true, true),
+        createColumn<ICar>('model', 'string', 'Model', true, true),
+        createColumn<ICar>('year', 'number', "שנת ייצור", true, true),
+        createColumn<ICar>('color', 'string', 'צבע', true, true),
+        createColumn<ICar>('price', 'number', 'מחיר', true, true),
+        createColumn<ICar>('fuelType','T_fuelType', 'סוג דלק', true, true),
+        createColumn<ICar>('isAvailable', 'boolean', 'האם פנוי', true, true),
+    ]
+  };
+    //   const userTableSchema: TableSchema = {
   //   name: 'users',
   //   columns: [
   //     { name: 'id', type: 'number', label: 'מזהה', sortable: true, filterable: false },
@@ -36,21 +54,3 @@ function createColumn<T>(
   //     { name: 'lastLogin', type: 'date', label: 'כניסה אחרונה', sortable: true, filterable: true }
   //   ]
   // };
-  
-
-
-    
-  export const carTableSchema: TableSchema<ICar> = {
-    name: 'cars',
-    columns: [
-      
-        createColumn<ICar>('_id', 'string', "מזהה"),
-        createColumn<ICar>('license', 'string', 'License'),
-        createColumn<ICar>('model', 'string', 'Model'),
-        createColumn<ICar>('year', 'number', "שנת ייצור"),
-        createColumn<ICar>('color', 'string', 'צבע'),
-        createColumn<ICar>('price', 'number', 'מחיר'),
-        createColumn<ICar>('fuelType','T_fuelType', 'סוג דלק'),
-        createColumn<ICar>('isAvailable', 'boolean', 'האם פנוי'),
-    ]
-  };

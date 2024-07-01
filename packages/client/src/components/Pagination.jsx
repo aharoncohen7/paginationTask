@@ -1,7 +1,7 @@
 
 const Pagination = ({ currentPage, totalPages, totalLength, itemsPerPage, setCurrentPage, }) => {
    console.log(totalPages)
-   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+   const pages = Array.from({ length: totalPages  }, (_, i) => i + 1);
 
    return (
       <span className="flex justify-center items-center gap-4 mt-4">
@@ -18,8 +18,6 @@ const Pagination = ({ currentPage, totalPages, totalLength, itemsPerPage, setCur
                {page === currentPage + 1 && page != totalPages && <span>...</span>}
             </>
          ))}
-
-
          <p>
             {`showing ${itemsPerPage} items from ${totalLength}`}
          </p>
