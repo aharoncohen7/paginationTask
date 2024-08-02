@@ -1,5 +1,4 @@
 ﻿# pagination-react
-# הוראות לתרגול חיפוש מיון סינון ופג'יניישן
 Instructions
 
 1. After copying, navigate to the main folder and run the commands:
